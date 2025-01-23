@@ -1,4 +1,5 @@
 import {Application} from 'pixi.js';
+import Game from './Game';
 
 const SCREEN_WIDTH = 384;
 const SCREEN_HEIGHT = 512;
@@ -8,6 +9,9 @@ const app = new Application();
 
 (async () => {
   await setup();
+  const game = new Game(app);
+  document.addEventListener('keydown', (event) => game.keyBoardHandler(event));
+  app.ticker.add(game.update, game);
 })();
 
 async function setup() {
