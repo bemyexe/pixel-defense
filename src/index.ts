@@ -10,7 +10,8 @@ const app = new Application();
 (async () => {
   await setup();
   const game = new Game(app);
-  document.addEventListener('keydown', (event) => game.keyBoardHandler(event));
+  const keyDownHandler = (event: KeyboardEvent) => game.keyBoardHandler(event);
+  document.addEventListener('keydown', keyDownHandler);
   app.ticker.add(game.update, game);
 })();
 
