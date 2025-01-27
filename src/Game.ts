@@ -116,7 +116,7 @@ export default class Game {
 
   private isEnemiesCanMove() {
     this.delayCounter++;
-    if (this.delayCounter < 5) {
+    if (this.delayCounter < 100) {
       return false;
     }
 
