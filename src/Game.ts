@@ -4,7 +4,6 @@ import {Bullet} from './Entities/Bullet';
 import {Enemy} from './Entities/Enemy';
 const PIXEL_COLOR = 0x000000;
 
-const log = console.log;
 const SCREEN_WIDTH = 384;
 const SCREEN_HEIGHT = 512;
 const PIXEL_SIZE = 16;
