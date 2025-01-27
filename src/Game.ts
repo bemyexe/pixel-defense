@@ -22,7 +22,7 @@ export default class Game {
   private delayCounter = 0;
   private gameSpeed = 0;
   private scoreCounter = 0;
-
+  private keyBoardHandlerBound: (event: KeyboardEvent) => void;
   constructor(app: Application) {
     this.app = app;
     this.scoreText = new Text({text: 'Score: 0', style});
@@ -33,6 +33,7 @@ export default class Game {
 
     this.hero = new Hero(heroView);
 
+    this.keyBoardHandlerBound = this.keyBoardHandler.bind(this);
     this.app.stage.addChild(this.scoreText);
   }
 
@@ -53,7 +54,11 @@ export default class Game {
     this.clear();
   }
 
-  public keyBoardHandler(event: KeyboardEvent) {
+  public startGame() {
+    document.addEventListener('keydown', this.keyBoardHandlerBound);
+  }
+
+  private keyBoardHandler(event: KeyboardEvent) {
     switch (event.key) {
       case 'ArrowRight': {
         if (this.hero.x < SCREEN_WIDTH - PIXEL_SIZE) {
@@ -111,7 +116,7 @@ export default class Game {
 
   private isEnemiesCanMove() {
     this.delayCounter++;
-    if (this.delayCounter < 100) {
+    if (this.delayCounter < 5) {
       return false;
     }
 
@@ -136,7 +141,7 @@ export default class Game {
   }
 
   private stopGame() {
-    document.removeEventListener('keydown', this.keyBoardHandler);
+    document.removeEventListener('keydown', this.keyBoardHandlerBound);
     this.app.ticker.remove(this.update, this);
     this.scoreText.text = `You lose! Score: ${this.scoreCounter}`;
   }
