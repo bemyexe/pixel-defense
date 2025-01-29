@@ -201,7 +201,7 @@ export default class Game {
     view.addChild(text);
     view.interactive = true;
     view.cursor = 'pointer';
-    view.on('click', callBack);
+    view.on('pointertap', callBack);
     this.app.stage.addChild(view);
 
     return view;
